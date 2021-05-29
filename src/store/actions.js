@@ -1,4 +1,4 @@
-import {reqAddress, reqCategorys, reqShops,reqposition} from '../api'
+import {reqAddress, reqCategorys, reqShops,reqposition,reqUserInfo} from '../api'
 import {RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_LATITUDE_LONGITUDE,  RECEIVE_SHOPS,RECEIVE_USER_INFO} from './mutation-types'
 export default {
   //异步获取经度
@@ -34,5 +34,13 @@ export default {
   },
   recordUser ({commit}, userInfo) {
     commit(RECEIVE_USER_INFO, {userInfo})
+  },
+  //异步获取用户信息
+  async getUserInfo ({commit}) {
+    const result = await reqUserInfo()
+    if (result.code === 0) {
+      const userInfo = result.data
+      commit(RECEIVE_USER_INFO, {userInfo})
+    }
   }
 }

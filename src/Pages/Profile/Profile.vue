@@ -3,17 +3,17 @@
     <section class="profile">
       <HeaderTop title="我的"></HeaderTop>
       <section class="profile-number">
-        <router-link to="/login" href="javascript:" class="profile-link">
+        <router-link :to="userInfo._id ? '/userinfo': '/login'" href="javascript:" class="profile-link">
           <div class="profile_image">
             <i class="iconfont icon-wode-xianxing-4"></i>
           </div>
           <div class="user-info">
-            <p class="user-info-top">{{userInfo.name || '登录/注册'}}</p>
+            <p class="user-info-top" v-if="!userInfo.phone">{{userInfo.name || '登录/注册'}}</p>
             <p>
               <span class="user-icon">
                 <i class="iconfont icon-shouji"></i>
               </span>
-              <span class="icon-mobile-number">暂无绑定手机号</span>
+              <span class="icon-mobile-number">{{userInfo.phone || '暂无绑定手机号'}}</span>
             </p>
           </div>
           <span class="arrow">
@@ -101,7 +101,7 @@ export default {
     HeaderTop
   },
   computed: {
-       ...mapState(['userInfo'])
+    ...mapState(['userInfo'])
    }
 }
 </script>

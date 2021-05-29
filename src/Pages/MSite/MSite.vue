@@ -3,12 +3,15 @@
     <!--首页头部title-->
     <!--由msite_header改成header-->
     <HeaderTop :title="address.name">
-      <span class="header_search" slot="left">
+      <router-link class="header_search" slot="left" to='/search'>
         <i class="iconfont icon-icon-test2"></i>
-      </span>
-      <span class="header_login" slot="right">
-        <span class="header_login_text">登录|注册</span>
-      </span>
+      </router-link>
+      <router-link class="header_login" slot="right" :to="userInfo._id ? '/userinfo': '/login'">
+        <span class="header_login_text" v-if="!userInfo._id">登录|注册</span>
+        <span class="header_login_text" v-else>
+  		  <i class="iconfont icon-wode-xianxing-4"></i>
+  	    </span>
+      </router-link>
     </HeaderTop>
     <!--首页导航轮播-->
     <nav class="msite_nav">
@@ -73,7 +76,7 @@ watch: {
     ShopList
   },
   computed: {
-      ...mapState(['address', 'categorys']),
+      ...mapState(['address', 'categorys','userInfo']),
       categorysArr () {
          // 1.先从当前组件中得到所有食品分类的一维数组
          const {categorys} = this

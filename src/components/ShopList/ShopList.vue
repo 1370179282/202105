@@ -56,6 +56,7 @@ import Star from '../Star/Star'
 export default {
   	computed: {
 		...mapState(['shops']),
+    },
     data () {
 	    return {
         baseImgUrl: 'http://owoccema2.bkt.clouddn.com/show/MintShop/'
@@ -64,8 +65,6 @@ export default {
     components:{
       Star
     }
-
-	}
 }
 
 </script>
