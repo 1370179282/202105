@@ -8,7 +8,7 @@
             <i class="iconfont icon-wode-xianxing-4"></i>
           </div>
           <div class="user-info">
-            <p class="user-info-top">登录/注册</p>
+            <p class="user-info-top">{{userInfo.name || '登录/注册'}}</p>
             <p>
               <span class="user-icon">
                 <i class="iconfont icon-shouji"></i>
@@ -94,11 +94,15 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 import HeaderTop from '../../components/HearderTop/HearderTop'
 export default {
   components:{
     HeaderTop
-  }
+  },
+  computed: {
+       ...mapState(['userInfo'])
+   }
 }
 </script>
 

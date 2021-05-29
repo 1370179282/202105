@@ -7,12 +7,12 @@
 
 <script>
 import FooterGuide from './components/FooterGuide/FooterGuide.vue';
-import {reqCategorys} from './api';
 export default {
   async mounted () {
-      const result = await reqCategorys()
-      console.log(result)
-    },
+       // 通过this.$store.dispatch 方法触发调用Action
+       this.$store.dispatch('getAddress')
+       
+   },
   components:{
     FooterGuide
   }

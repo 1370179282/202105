@@ -1,46 +1,66 @@
 import ajax from './ajax';
+import getPosition from './ajax'
+const BASE_URL = '/api'
 //获取地址信息 
-export const reqAddress = geohash =>ajax(`/position/${geohash}`);
-//获取食品分类列表
-export const reqCategorys = () => ajax('/index_category')
+export const reqAddress = geohash => ajax(`${BASE_URL}/position/${geohash}`)
+/**
+ * 获取 msite 页面食品分类列表
+ */
+export const reqCategorys = () => ajax(BASE_URL + '/index_category')
 /**
  * 获取 msite 商铺列表(根据query参数：经纬度)
  * 将经纬度两个数据作为一个参数对象传入
- * 也可以两个数据分别传入ajax， 然后再放入一个对象参数内， 如下面的手机号验证码接口
+ * 也可以两个数据分别传入ajax， 然后再放入一个对象参数内， 如下面的手机号接口
  */
-export const reqShops = ({
-  latitude,
-  longitude
-}) => ajax('/shops', {
-  latitude,
-  longitude
-})
+export const reqShops = ({latitude, longitude}) => ajax(BASE_URL + '/shops', {latitude, longitude})
+/**
+ * 根据经纬度和关键字搜索商铺列表
+ */
+export const reqSearchShop = (geohash, keyword) => ajax(BASE_URL + '/search_shops', {geohash, keyword})
 /**
  * 账号密码登录
  */
-export const reqPwdLogin = (name, pwd, captcha) => ajax('/login_pwd', {
-  name,
-  pwd,
-  captcha
-}, 'POST')
+export const reqPwdLogin = ({name, pwd, captcha}) => ajax(BASE_URL + '/login_pwd', {name, pwd, captcha}, 'POST')
 /**
  * 获取短信验证码
  */
-export const reqSendCode = phone => ajax('/sendcode', {
-  phone
-})
+export const reqSendCode = phone => ajax(BASE_URL + '/sendcode', {phone})
 /**
  * 手机号验证码登录
  */
-export const reqSmsLogin = (phone, code) => ajax('/login_sms', {
-  phone,
-  code
-}, 'POST')
+export const reqSmsLogin = (phone, code) => ajax(BASE_URL + '/login_sms', {phone, code}, 'POST')
 /**
  * 获取用户信息(根据会话)
  */
-export const reqUser = () => ajax('/userinfo')
-/*
+export const reqUserInfo = () => ajax(BASE_URL + '/userinfo')
+/**
  * 请求登出
  */
-export const reqLogout = () => ajax('/logout')
+export const reqLogout = () => ajax(BASE_URL + '/logout')
+/**
+ * 获取商家信息(下列请求由mock拦截并返回 不需要代理)
+ */
+export const reqShopInfo = () => ajax('/info')
+/**
+ * 获取商家评价数组
+ */
+export const reqShopRatings = () => ajax('/ratings')
+/**
+ * 获取商家商品数组
+ */
+export const reqShopGoods = () => ajax('/goods')
+/**
+ * 获取经度
+ */
+ 
+ /*export const reqposition = () => getPosition().then(result => {
+   let queryData = {
+     longitude: String(result.longitude).match(/\d+\.\d{0,6}/)[0],
+     latitude: String(result.latitude).match(/\d+\.\d{0,6}/)[0],
+     channelType: '00'
+   }
+   console.log(queryData)
+   return queryData;
+ }).catch(err => {
+   console.log(err)
+ })*/
