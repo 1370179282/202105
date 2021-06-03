@@ -33,4 +33,39 @@ export default {
 	[RESET_USER_INFO] (state) {
 		state.userInfo = {}
 	},
+	[RECEIVE_INFO] (state, {info}) {
+		state.info = info
+	},
+	  
+	  [RECEIVE_RATINGS] (state, {ratings}) {
+		state.ratings = ratings
+	},
+	  
+	  [RECEIVE_GOODS] (state, {goods}) {
+		state.goods = goods
+	},
+	[INCREMENT_FOOD_COUNT] (state, {food}) {
+		if (!food.count) { // 第一次增加
+		  // food.count = 1  // 这样新增的属性没有数据绑定
+		  /*
+		  对象
+		  属性名
+		  属性值
+		   */
+		  Vue.set(food, 'count', 1) // 让新增的属性也有数据绑定
+		} else {
+		  food.count++
+		}
+	  },
+	[DECREMENT_FOOD_COUNT] (state, {food}) {
+		if (food.count) { // 只有有值才去减
+		  food.count--
+		}
+	  },
+	  [CLEAR_CART] (state) {
+		// 清除food中的count
+		state.cartFoods.forEach(food => { food.count = 0 })
+		// 移除购物车中所有购物项
+		state.cartFoods = []
+	  }
 }

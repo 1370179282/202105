@@ -113,8 +113,6 @@ export default {
     if (result.code === 0) {
       const goods = result.data
       commit(RECEIVE_GOODS, {goods})
-      // 数据更新了, 通知一下组件
-      callback && callback()
     }
   },
   // 同步更新food中的count值
@@ -138,6 +136,13 @@ export default {
     if (result.code === 0) {
       const searchShops = result.data
       commit(RECEIVE_SEARCH_SHOPS, {searchShops})
+    }
+  },
+  updateFoodCount ({commit}, {isAdd, food}) {
+    if (isAdd) {
+      commit(INCREMENT_FOOD_COUNT, {food})
+    } else {
+      commit(DECREMENT_FOOD_COUNT, {food})
     }
   }
 }

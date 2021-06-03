@@ -9,6 +9,8 @@ import './assets/Fontclass/iconfont.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import store from './store'
 import {Button} from 'mint-ui'
+import '../mock/mockServer'
+
 
 Vue.component(Button.name, Button)
 
